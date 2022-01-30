@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/localFileFragment2">
+
+
+    <fragment
+        android:id="@+id/audioFileFragment2"
+        android:name="com.example.maudioplayer.AudioFileFragment"
+        android:label="fragment_audio_file"
+        tools:layout="@layout/fragment_audio_file" />
+    <fragment
+        android:id="@+id/playVideo"
+        android:name="com.example.maudioplayer.PlayVideo"
+        android:label="fragment_play_video"
+        tools:layout="@layout/fragment_play_video" />
+    <fragment
+        android:id="@+id/localFileFragment2"
+        android:name="com.example.maudioplayer.LocalFileFragment"
+        android:label="fragment_local_file"
+        tools:layout="@layout/fragment_local_file" >
+        <action
+            android:id="@+id/action_localFileFragment2_to_videosInsideFolder"
+            app:destination="@id/videosInsideFolder" />
+        <action
+            android:id="@+id/action_localFileFragment2_to_audioFileFragment2"
+            app:destination="@id/audioFileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/videosInsideFolder"
+        android:name="com.example.maudioplayer.VideosInsideFolder"
+        android:label="fragment_videos_inside_folder"
+        tools:layout="@layout/fragment_videos_inside_folder" >
+        <action
+            android:id="@+id/action_videosInsideFolder_to_playVideo"
+            app:destination="@id/playVideo" />
+    </fragment>
+</navigation>
