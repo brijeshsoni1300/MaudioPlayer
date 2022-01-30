@@ -95,15 +95,10 @@ public class PlayVideo extends Fragment {
         MediaItem mediaItem=MediaItem.fromUri(Uri.parse(PathOfVideo));
         player.setMediaItem(mediaItem);
         player.prepare();
-        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.MANAGE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.MANAGE_EXTERNAL_STORAGE}, 1);
 
-        }else
-        {
             player.play();
 
-        }
+
 
 
 
