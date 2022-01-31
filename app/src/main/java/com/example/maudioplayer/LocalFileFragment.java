@@ -96,6 +96,11 @@ public class LocalFileFragment extends Fragment implements VideoFolderAdapter.Li
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        if(savedInstanceState!=null)
+        {
+            videoFolderList= (ArrayList<VideoFolderModel>) savedInstanceState.getSerializable("LIST");
+        }
         View rootView = inflater.inflate(R.layout.fragment_local_file, container, false);
 
         SharedViewModel model= new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
@@ -158,23 +163,22 @@ public class LocalFileFragment extends Fragment implements VideoFolderAdapter.Li
 
         Uri uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
 
-        String[] projection = new String[]{MediaStore.Video.Media.TITLE, MediaStore.Video.Media.SIZE, MediaStore.Video.Media._ID,
-                MediaStore.Video.Media.BUCKET_DISPLAY_NAME, MediaStore.Video.Media.DATA, MediaStore.Video.Media.DATE_ADDED,
-                MediaStore.Video.Media.DURATION, MediaStore.Video.Media.BUCKET_ID};
+        String[] projection = new String[]{
+                MediaStore.Video.Media.BUCKET_DISPLAY_NAME,  MediaStore.Video.Media.BUCKET_ID};
 
         Cursor cursor = contentResolver.query(uri, projection, null, null, MediaStore.Video.Media.DATE_ADDED + " DESC");
         if (cursor != null && cursor.moveToFirst()) {
             do {
 
-                String VideoTitle = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.TITLE));
-                String VideoPath = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
-                Bitmap VideoThumbnail = ThumbnailUtils.createVideoThumbnail(VideoPath, MediaStore.Images.Thumbnails.MINI_KIND);
-                String VideoSize = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.SIZE));
-                String VideoDuration = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
+//                String VideoTitle = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.TITLE));
+//                String VideoPath = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
+//                Bitmap VideoThumbnail = ThumbnailUtils.createVideoThumbnail(VideoPath, MediaStore.Images.Thumbnails.MINI_KIND);
+//                String VideoSize = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.SIZE));
+//                String VideoDuration = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DURATION));
 
                 String folderName = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.BUCKET_DISPLAY_NAME));
                 String folderId = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.BUCKET_ID));
-                String VideoId=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media._ID));
+//                String VideoId=cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media._ID));
 
 //                try {
 //                    File file=new File(VideoPath);
