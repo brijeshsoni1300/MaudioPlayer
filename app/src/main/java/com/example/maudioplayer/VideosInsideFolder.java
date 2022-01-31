@@ -79,6 +79,10 @@ public class VideosInsideFolder extends Fragment implements VideoListAdapter.Lis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_videos_inside_folder, container, false);
+        if(videoList!=null)
+        {
+            videoList.clear();
+        }
         int pos=0;
         if(getArguments()!=null)
         {
