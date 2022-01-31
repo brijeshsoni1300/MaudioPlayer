@@ -5,19 +5,24 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 
 public class SharedViewModel extends ViewModel {
+
     private int lastPosition;
+    private ArrayList<VideoFolderModel>videoFolderModelArrayList=null;
 
-    private ArrayList<String> videoFolderList;
-
-
-
-    public void setLastPosition(int lastPosition) {
-        this.lastPosition = lastPosition;
+    public void setLastPosition(int lastPosition)
+    {
+        this.lastPosition=lastPosition;
+    }
+    public int getLastPosition()
+    {
+        return this.lastPosition;
     }
 
-    public int getLastPosition() {
-        return lastPosition;
+    public ArrayList<VideoFolderModel> getVideoFolderModelArrayList() {
+        return videoFolderModelArrayList;
     }
 
+    public void setVideoFolderModelArrayList(ArrayList<VideoFolderModel> videoFolderModelArrayList) {
+        this.videoFolderModelArrayList = videoFolderModelArrayList;
+    }
 }
-

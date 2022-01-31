@@ -2,6 +2,8 @@ package com.example.maudioplayer;
 
 import android.Manifest;
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -17,12 +19,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
@@ -80,6 +87,8 @@ public class LocalFileFragment extends Fragment implements VideoFolderAdapter.Li
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            Toast.makeText(getContext(),getArguments().getInt("list"),Toast.LENGTH_SHORT).show();
+            videoFolderList=(ArrayList<VideoFolderModel>) savedInstanceState.getSerializable("LIST");
         }
     }
 
@@ -111,14 +120,22 @@ public class LocalFileFragment extends Fragment implements VideoFolderAdapter.Li
             }
         });
 
+
         if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
 
         }else
         {
-            getVideos();
+
+            if(videoFolderList.size()==0)
+            {
+                getVideos();
+
+            }
+
         }
+
 
 
 
@@ -181,6 +198,7 @@ public class LocalFileFragment extends Fragment implements VideoFolderAdapter.Li
 //        model.setVideoFolderList(videoFolderList);
 
 
+
     }
 
 
@@ -199,16 +217,14 @@ public class LocalFileFragment extends Fragment implements VideoFolderAdapter.Li
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("list", lastPosition);
+        outState.putSerializable("LIST",videoFolderList);
     }
 
 
     @Override
     public void onDetach() {
         super.onDetach();
-//        SharedPreferences getPrefs= PreferenceManager.getDefaultSharedPreferences(getContext());
-//        SharedPreferences.Editor editor=getPrefs.edit();
-//        editor.putInt("lastPos",lastPosition);
-//        editor.apply();
+
     }
 
     @Override
