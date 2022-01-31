@@ -99,12 +99,6 @@ public class PlayVideo extends Fragment {
             player.play();
 
 
-
-
-
-
-
-
         //specify the location of media file
 
 
